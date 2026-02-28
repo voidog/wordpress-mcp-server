@@ -1,14 +1,14 @@
 # WordPress MCP Server
 
-[![Tests](https://github.com/voidog-ai/wordpress-mcp-server/actions/workflows/tests.yml/badge.svg)](https://github.com/voidog-ai/wordpress-mcp-server/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/voidog-ai/wordpress-mcp-server/graph/badge.svg)](https://codecov.io/gh/voidog-ai/wordpress-mcp-server)
+[![Tests](https://github.com/voidog/wordpress-mcp-server/actions/workflows/tests.yml/badge.svg)](https://github.com/voidog/wordpress-mcp-server/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/gh/voidog/wordpress-mcp-server/graph/badge.svg)](https://codecov.io/gh/voidog/wordpress-mcp-server)
 [![Node.js](https://img.shields.io/badge/Node.js-22%2B-5FA04E?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that gives AI assistants full control over WordPress content management.
 
-Works with the [wordpress-mcp-connector](https://github.com/voidog-ai/wordpress-mcp-connector) WordPress plugin.
+Works with the [wordpress-mcp-connector](https://github.com/voidog/wordpress-mcp-connector) WordPress plugin.
 
 ## Tools
 
@@ -26,13 +26,13 @@ Works with the [wordpress-mcp-connector](https://github.com/voidog-ai/wordpress-
 ## Requirements
 
 - Node.js 22+
-- WordPress site with the [wordpress-mcp-connector](https://github.com/voidog-ai/wordpress-mcp-connector) plugin installed and an API key generated
+- WordPress site with the [wordpress-mcp-connector](https://github.com/voidog/wordpress-mcp-connector) plugin installed and an API key generated
 
 ## Quick Start
 
 ### 1. Install the WordPress Plugin
 
-Install and activate [wordpress-mcp-connector](https://github.com/voidog-ai/wordpress-mcp-connector) on your WordPress site, then generate an API key from **Settings → MCP Connector**.
+Install and activate [wordpress-mcp-connector](https://github.com/voidog/wordpress-mcp-connector) on your WordPress site, then generate an API key from **Settings → MCP Connector**.
 
 ### 2. Configure Your MCP Client
 
@@ -63,7 +63,7 @@ Add to your MCP client configuration (e.g. Claude Desktop, Claude Code):
 ## Development
 
 ```bash
-git clone https://github.com/voidog-ai/wordpress-mcp-server.git
+git clone https://github.com/voidog/wordpress-mcp-server.git
 cd wordpress-mcp-server
 npm install
 npm run build

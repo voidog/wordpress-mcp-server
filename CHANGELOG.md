@@ -16,4 +16,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Error handling** — Structured error responses with message truncation (200 char limit)
 - **Test suite** — 148 Vitest tests (99% statement coverage) with Zod schema validation and error propagation tests
 
-[1.0.0]: https://github.com/voidog-ai/wordpress-mcp-server/releases/tag/v1.0.0
+[1.0.0]: https://github.com/voidog/wordpress-mcp-server/releases/tag/v1.0.0
