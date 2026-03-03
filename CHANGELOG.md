@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2026-02-28
+## [1.1.0] - 2026-03-03
 
 ### Added
 
@@ -15,5 +15,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Zod schema validation** — Input validation with boundary constraints for all tool parameters
 - **Error handling** — Structured error responses with message truncation (200 char limit)
 - **Test suite** — 148 Vitest tests (99% statement coverage) with Zod schema validation and error propagation tests
+- **CI/CD** — GitHub Actions with Node.js 20/22 matrix and Codecov integration
 
-[1.0.0]: https://github.com/voidog/wordpress-mcp-server/releases/tag/v1.0.0
+[1.1.0]: https://github.com/voidog/wordpress-mcp-server/releases/tag/v1.1.0

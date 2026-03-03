@@ -1,8 +1,9 @@
 # WordPress MCP Server
 
+[![npm](https://img.shields.io/npm/v/@voidog/wordpress-mcp-server)](https://www.npmjs.com/package/@voidog/wordpress-mcp-server)
 [![Tests](https://github.com/voidog/wordpress-mcp-server/actions/workflows/tests.yml/badge.svg)](https://github.com/voidog/wordpress-mcp-server/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/gh/voidog/wordpress-mcp-server/graph/badge.svg)](https://codecov.io/gh/voidog/wordpress-mcp-server)
-[![Node.js](https://img.shields.io/badge/Node.js-22%2B-5FA04E?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20%2B-5FA04E?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -25,7 +26,7 @@ Works with the [wordpress-mcp-connector](https://github.com/voidog/wordpress-mcp
 
 ## Requirements
 
-- Node.js 22+
+- Node.js 20+
 - WordPress site with the [wordpress-mcp-connector](https://github.com/voidog/wordpress-mcp-connector) plugin installed and an API key generated
 
 ## Quick Start
@@ -79,7 +80,7 @@ npm test
 npm run test:coverage
 ```
 
-Tests live in the `tests/` directory, organized into `client/`, `index/`, and `tools/` subdirectories. All tests run against mock implementations — no live WordPress site required.
+Tests live in the `tests/` directory with `client.test.ts`, `index.test.ts`, and `tools/*.test.ts`. All tests run against mock implementations — no live WordPress site required.
 
 ### Project Structure
 
@@ -95,6 +96,13 @@ wordpress-mcp-server/
 │       ├── media.ts      # Media management tools
 │       ├── categories.ts # Category tools
 │       └── tags.ts       # Tag tools
+├── tests/
+│   ├── helpers/
+│   │   └── mock-server.ts  # MockMcpServer with Zod validation
+│   ├── tools/              # Per-tool test files
+│   ├── client.test.ts
+│   └── index.test.ts
+├── vitest.config.ts
 ├── package.json
 ├── tsconfig.json
 ├── LICENSE
@@ -105,7 +113,7 @@ wordpress-mcp-server/
 
 - [Model Context Protocol SDK](https://github.com/modelcontextprotocol/typescript-sdk) — MCP server framework
 - [Zod](https://zod.dev/) — Input schema validation
-- TypeScript 5.9 / Node.js 22
+- TypeScript 5.9 / Node.js 20+
 
 ## Architecture
 
