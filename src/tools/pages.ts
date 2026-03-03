@@ -11,7 +11,7 @@ export function registerPageTools(server: McpServer, client: WordPressClient): v
       page: z.number().min(1).default(1).describe('Page number'),
       status: z.string().default('any').describe('Page status filter (publish, draft, any, etc.)'),
       search: z.string().optional().describe('Search term'),
-      parent: z.number().optional().describe('Filter by parent page ID'),
+      parent: z.number().int().min(0).optional().describe('Filter by parent page ID'),
       orderby: z.string().default('date').describe('Order by field (date, title, modified, etc.)'),
       order: z.enum(['ASC', 'DESC']).default('DESC').describe('Sort order'),
     },
@@ -37,7 +37,7 @@ export function registerPageTools(server: McpServer, client: WordPressClient): v
     'wp_get_page',
     'Get a single WordPress page by ID',
     {
-      id: z.number().describe('Page ID'),
+      id: z.number().int().min(1).describe('Page ID'),
     },
     async (args) => {
       const data = await client.get(`/pages/${args.id}`);
@@ -56,8 +56,8 @@ export function registerPageTools(server: McpServer, client: WordPressClient): v
       excerpt: z.string().optional().describe('Page excerpt'),
       status: z.enum(['publish', 'draft', 'pending', 'private']).default('draft').describe('Page status'),
       slug: z.string().optional().describe('Page slug'),
-      parent: z.number().optional().describe('Parent page ID'),
-      featured_media: z.number().optional().describe('Featured image attachment ID'),
+      parent: z.number().int().min(0).optional().describe('Parent page ID'),
+      featured_media: z.number().int().min(0).optional().describe('Featured image attachment ID'),
     },
     async (args) => {
       const body: Record<string, unknown> = {
@@ -81,14 +81,14 @@ export function registerPageTools(server: McpServer, client: WordPressClient): v
     'wp_update_page',
     'Update an existing WordPress page',
     {
-      id: z.number().describe('Page ID (required)'),
+      id: z.number().int().min(1).describe('Page ID (required)'),
       title: z.string().optional().describe('Page title'),
       content: z.string().optional().describe('Page content (HTML)'),
       excerpt: z.string().optional().describe('Page excerpt'),
       status: z.enum(['publish', 'draft', 'pending', 'private', 'trash']).optional().describe('Page status'),
       slug: z.string().optional().describe('Page slug'),
-      parent: z.number().optional().describe('Parent page ID'),
-      featured_media: z.number().optional().describe('Featured image attachment ID (0 to remove)'),
+      parent: z.number().int().min(0).optional().describe('Parent page ID'),
+      featured_media: z.number().int().min(0).optional().describe('Featured image attachment ID (0 to remove)'),
     },
     async (args) => {
       const { id, ...rest } = args;
@@ -108,7 +108,7 @@ export function registerPageTools(server: McpServer, client: WordPressClient): v
     'wp_delete_page',
     'Delete a WordPress page (moves to trash)',
     {
-      id: z.number().describe('Page ID to delete'),
+      id: z.number().int().min(1).describe('Page ID to delete'),
     },
     async (args) => {
       const data = await client.delete(`/pages/${args.id}`);

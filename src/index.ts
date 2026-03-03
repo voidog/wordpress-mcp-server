@@ -16,17 +16,18 @@ import { registerMediaTools } from './tools/media.js';
 
 const WORDPRESS_URL = process.env.WORDPRESS_URL;
 const WORDPRESS_API_KEY = process.env.WORDPRESS_API_KEY;
+const WORDPRESS_USERNAME = process.env.WORDPRESS_USERNAME;
 
 if (!WORDPRESS_URL || !WORDPRESS_API_KEY) {
   console.error('Error: WORDPRESS_URL and WORDPRESS_API_KEY environment variables are required');
   process.exit(1);
 }
 
-const client = new WordPressClient(WORDPRESS_URL, WORDPRESS_API_KEY);
+const client = new WordPressClient(WORDPRESS_URL, WORDPRESS_API_KEY, WORDPRESS_USERNAME);
 
 const server = new McpServer({
   name: 'wordpress-mcp-server',
-  version: '1.0.0',
+  version: '1.2.0',
 });
 
 registerSiteTools(server, client);

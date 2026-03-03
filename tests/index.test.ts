@@ -72,6 +72,17 @@ describe('index.ts', () => {
     expect(exitSpy).toHaveBeenCalledWith(1);
   });
 
+  it('starts successfully without WORDPRESS_USERNAME', async () => {
+    process.env.WORDPRESS_URL = 'https://wp.test';
+    process.env.WORDPRESS_API_KEY = 'test-key';
+    delete process.env.WORDPRESS_USERNAME;
+
+    await import('../src/index.js');
+
+    expect(exitSpy).not.toHaveBeenCalled();
+    expect(connectSpy).toHaveBeenCalled();
+  });
+
   it('registers all tool groups when env vars are set', async () => {
     process.env.WORDPRESS_URL = 'https://wp.test';
     process.env.WORDPRESS_API_KEY = 'test-key';

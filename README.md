@@ -47,7 +47,8 @@ Add to your MCP client configuration (e.g. Claude Desktop, Claude Code):
       "args": ["-y", "@voidog/wordpress-mcp-server"],
       "env": {
         "WORDPRESS_URL": "https://your-site.com",
-        "WORDPRESS_API_KEY": "your-api-key-here"
+        "WORDPRESS_API_KEY": "your-api-key-here",
+        "WORDPRESS_USERNAME": "author1"
       }
     }
   }
@@ -60,6 +61,7 @@ Add to your MCP client configuration (e.g. Claude Desktop, Claude Code):
 |----------|----------|-------------|
 | `WORDPRESS_URL` | Yes | WordPress site URL (e.g. `https://example.com`) |
 | `WORDPRESS_API_KEY` | Yes | API key from WordPress admin → Settings → MCP Connector |
+| `WORDPRESS_USERNAME` | No | WordPress username to execute operations as (defaults to first admin) |
 
 ## Development
 

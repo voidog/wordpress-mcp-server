@@ -10,7 +10,7 @@ export function registerCategoryTools(server: McpServer, client: WordPressClient
       per_page: z.number().min(1).max(100).default(100).describe('Number of categories per page'),
       page: z.number().min(1).default(1).describe('Page number'),
       search: z.string().optional().describe('Search term'),
-      parent: z.number().optional().describe('Parent category ID'),
+      parent: z.number().int().min(0).optional().describe('Parent category ID'),
       hide_empty: z.boolean().default(false).describe('Hide categories with no posts'),
     },
     async (args) => {
@@ -36,7 +36,7 @@ export function registerCategoryTools(server: McpServer, client: WordPressClient
       name: z.string().describe('Category name (required)'),
       slug: z.string().optional().describe('Category slug'),
       description: z.string().optional().describe('Category description'),
-      parent: z.number().optional().describe('Parent category ID'),
+      parent: z.number().int().min(0).optional().describe('Parent category ID'),
     },
     async (args) => {
       const body: Record<string, unknown> = { name: args.name };

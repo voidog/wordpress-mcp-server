@@ -31,7 +31,7 @@ export function registerMediaTools(server: McpServer, client: WordPressClient): 
     'wp_get_media',
     'Get a single WordPress media attachment by ID',
     {
-      id: z.number().describe('Media attachment ID'),
+      id: z.number().int().min(1).describe('Media attachment ID'),
     },
     async (args) => {
       const data = await client.get(`/media/${args.id}`);
@@ -81,7 +81,7 @@ export function registerMediaTools(server: McpServer, client: WordPressClient): 
     'wp_update_media',
     'Update WordPress media attachment metadata',
     {
-      id: z.number().describe('Media attachment ID (required)'),
+      id: z.number().int().min(1).describe('Media attachment ID (required)'),
       title: z.string().optional().describe('Media title'),
       caption: z.string().optional().describe('Media caption'),
       alt_text: z.string().optional().describe('Alt text'),
@@ -105,7 +105,7 @@ export function registerMediaTools(server: McpServer, client: WordPressClient): 
     'wp_delete_media',
     'Permanently delete a WordPress media attachment',
     {
-      id: z.number().describe('Media attachment ID to delete'),
+      id: z.number().int().min(1).describe('Media attachment ID to delete'),
     },
     async (args) => {
       const data = await client.delete(`/media/${args.id}`);

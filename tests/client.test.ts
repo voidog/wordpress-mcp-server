@@ -41,6 +41,34 @@ describe('WordPressClient', () => {
     });
   });
 
+  // --------------- X-MCP-Username header ---------------
+
+  describe('X-MCP-Username header', () => {
+    it('does not include X-MCP-Username header when username is undefined', async () => {
+      const client = new WordPressClient('https://wp.test', 'key');
+      mockResponse(mockFetch, { success: true, data: 'ok' });
+      await client.get('/site');
+      const [, options] = mockFetch.mock.calls[0];
+      expect(options.headers['X-MCP-Username']).toBeUndefined();
+    });
+
+    it('includes X-MCP-Username header when username is provided', async () => {
+      const client = new WordPressClient('https://wp.test', 'key', 'author1');
+      mockResponse(mockFetch, { success: true, data: 'ok' });
+      await client.get('/site');
+      const [, options] = mockFetch.mock.calls[0];
+      expect(options.headers['X-MCP-Username']).toBe('author1');
+    });
+
+    it('X-MCP-Username header value matches constructor argument', async () => {
+      const client = new WordPressClient('https://wp.test', 'key', 'editor_user');
+      mockResponse(mockFetch, { success: true, data: 'ok' });
+      await client.post('/posts', { title: 'Test' });
+      const [, options] = mockFetch.mock.calls[0];
+      expect(options.headers['X-MCP-Username']).toBe('editor_user');
+    });
+  });
+
   // --------------- request() ---------------
 
   describe('request()', () => {

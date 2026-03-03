@@ -11,8 +11,8 @@ export function registerPostTools(server: McpServer, client: WordPressClient): v
       page: z.number().min(1).default(1).describe('Page number'),
       status: z.string().default('any').describe('Post status filter (publish, draft, any, etc.)'),
       search: z.string().optional().describe('Search term'),
-      category: z.number().optional().describe('Filter by category ID'),
-      tag: z.number().optional().describe('Filter by tag ID'),
+      category: z.number().int().min(1).optional().describe('Filter by category ID'),
+      tag: z.number().int().min(1).optional().describe('Filter by tag ID'),
       orderby: z.string().default('date').describe('Order by field (date, title, modified, etc.)'),
       order: z.enum(['ASC', 'DESC']).default('DESC').describe('Sort order'),
     },
@@ -39,7 +39,7 @@ export function registerPostTools(server: McpServer, client: WordPressClient): v
     'wp_get_post',
     'Get a single WordPress post by ID',
     {
-      id: z.number().describe('Post ID'),
+      id: z.number().int().min(1).describe('Post ID'),
     },
     async (args) => {
       const data = await client.get(`/posts/${args.id}`);
@@ -58,9 +58,9 @@ export function registerPostTools(server: McpServer, client: WordPressClient): v
       excerpt: z.string().optional().describe('Post excerpt'),
       status: z.enum(['publish', 'draft', 'pending', 'private', 'future']).default('draft').describe('Post status'),
       slug: z.string().optional().describe('Post slug'),
-      categories: z.array(z.number()).optional().describe('Array of category IDs'),
-      tags: z.array(z.number()).optional().describe('Array of tag IDs'),
-      featured_media: z.number().optional().describe('Featured image attachment ID'),
+      categories: z.array(z.number().int().min(1)).optional().describe('Array of category IDs'),
+      tags: z.array(z.number().int().min(1)).optional().describe('Array of tag IDs'),
+      featured_media: z.number().int().min(0).optional().describe('Featured image attachment ID'),
     },
     async (args) => {
       const body: Record<string, unknown> = {
@@ -85,15 +85,15 @@ export function registerPostTools(server: McpServer, client: WordPressClient): v
     'wp_update_post',
     'Update an existing WordPress post',
     {
-      id: z.number().describe('Post ID (required)'),
+      id: z.number().int().min(1).describe('Post ID (required)'),
       title: z.string().optional().describe('Post title'),
       content: z.string().optional().describe('Post content (HTML)'),
       excerpt: z.string().optional().describe('Post excerpt'),
       status: z.enum(['publish', 'draft', 'pending', 'private', 'future', 'trash']).optional().describe('Post status'),
       slug: z.string().optional().describe('Post slug'),
-      categories: z.array(z.number()).optional().describe('Array of category IDs'),
-      tags: z.array(z.number()).optional().describe('Array of tag IDs'),
-      featured_media: z.number().optional().describe('Featured image attachment ID (0 to remove)'),
+      categories: z.array(z.number().int().min(1)).optional().describe('Array of category IDs'),
+      tags: z.array(z.number().int().min(1)).optional().describe('Array of tag IDs'),
+      featured_media: z.number().int().min(0).optional().describe('Featured image attachment ID (0 to remove)'),
     },
     async (args) => {
       const { id, ...rest } = args;
@@ -113,7 +113,7 @@ export function registerPostTools(server: McpServer, client: WordPressClient): v
     'wp_delete_post',
     'Delete a WordPress post (moves to trash)',
     {
-      id: z.number().describe('Post ID to delete'),
+      id: z.number().int().min(1).describe('Post ID to delete'),
     },
     async (args) => {
       const data = await client.delete(`/posts/${args.id}`);

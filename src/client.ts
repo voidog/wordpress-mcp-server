@@ -15,10 +15,12 @@ interface WPResponse<T = unknown> {
 export class WordPressClient {
   private baseUrl: string;
   private apiKey: string;
+  private username?: string;
 
-  constructor(baseUrl: string, apiKey: string) {
+  constructor(baseUrl: string, apiKey: string, username?: string) {
     this.baseUrl = baseUrl.replace(/\/+$/, '');
     this.apiKey = apiKey;
+    this.username = username;
   }
 
   private get endpoint(): string {
@@ -50,6 +52,9 @@ export class WordPressClient {
       'X-MCP-API-Key': this.apiKey,
       'Content-Type': 'application/json',
     };
+    if (this.username) {
+      headers['X-MCP-Username'] = this.username;
+    }
 
     const options: RequestInit = { method, headers };
     if (body && (method === 'POST' || method === 'PUT')) {
